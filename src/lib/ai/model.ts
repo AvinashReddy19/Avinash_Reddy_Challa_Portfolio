@@ -1,4 +1,3 @@
-
 // src/lib/ai/models.ts
 import { ChatGroq } from "@langchain/groq";
 
@@ -8,9 +7,9 @@ export function getGroqModel() {
     throw new Error("GROQ_API_KEY is not configured");
   }
   
-  // Initialize the Groq model with Llama 3 (8B parameter version)
+  // Initialize the Groq model with Mixtral
   return new ChatGroq({
-    model: "llama3-8b-8192", // 8K context window
+    model: "llama-3.3-70b-versatile",   // ✅ updated to Mixtral
     temperature: 0.5,
   });
 }

@@ -1,11 +1,10 @@
 // src/app/api/chat/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { createPortfolioAssistant } from "@/lib/ai/agent";
-import { ChatMessage } from "@/lib/ai/types";
+import { createPortfolioAssistant } from "@/lib/ai/assistant";
+import { HumanMessage, AIMessage } from "@langchain/core/messages";
 
-// This is a simple in-memory store for the chat history
-// In a production environment, you'd use a database
-const CHAT_HISTORY: Record<string, ChatMessage[]> = {};
+// In-memory chat history store
+const CHAT_HISTORY: Record<string, Array<HumanMessage | AIMessage>> = {};
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,40 +25,40 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create or retrieve the assistant
-    const assistant = await createPortfolioAssistant();
+    // Create the portfolio assistant
+    const assistant = createPortfolioAssistant();
 
     // Get or initialize chat history
     if (!CHAT_HISTORY[chatId]) {
       CHAT_HISTORY[chatId] = [];
     }
     
-    // Get the current messages
-    const currentMessages = CHAT_HISTORY[chatId];
-    
     // Add the new user message
-    const newUserMessage: ChatMessage = {
-      role: "human",
-      content: message,
-    };
+    const userMessage = new HumanMessage(message);
     
-    const updatedMessages = [...currentMessages, newUserMessage];
-
-    // Execute the agent
-    const result = await assistant.invoke({
-      messages: updatedMessages,
-      context: "",
-      response: "",
-    });
-
-    // Update the chat history
-    CHAT_HISTORY[chatId] = result.messages;
-
-    // Extract the assistant's response (the last message)
-    const assistantResponse = result.messages[result.messages.length - 1];
+    // Generate a response
+    const response = await assistant.generateResponse(
+      message, 
+      CHAT_HISTORY[chatId]
+    );
+    
+    // Create assistant message
+    const assistantMessage = new AIMessage(response);
+    
+    // Update the conversation history
+    CHAT_HISTORY[chatId] = [
+      ...CHAT_HISTORY[chatId],
+      userMessage,
+      assistantMessage
+    ];
+    
+    // Keep only the last 10 messages to prevent context window issues
+    if (CHAT_HISTORY[chatId].length > 20) {
+      CHAT_HISTORY[chatId] = CHAT_HISTORY[chatId].slice(-20);
+    }
 
     return NextResponse.json({
-      response: assistantResponse.content,
+      response,
     });
   } catch (error: any) {
     console.error("Error in chat endpoint:", error);

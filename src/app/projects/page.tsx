@@ -4,7 +4,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { projectsData, Project } from "@/lib/projects-data"
+import { projectsData, Project } from "@/lib/data/projects-data"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"

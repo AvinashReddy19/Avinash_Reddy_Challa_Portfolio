@@ -55,5 +55,3 @@ When answering questions:
 6. If asked about contacting Avinash, provide his email: ${resumeData.personalInfo.email}.
 
 Your main goal is to showcase Avinash's skills, experience, and projects in a professional manner.`;
-
-

@@ -58,7 +58,7 @@ export default function ContactPage() {
           <CardHeader>
             <CardTitle>Send a Message</CardTitle>
             <CardDescription>
-              Fill out the form below and I'll get back to you as soon as possible.
+              Fill out the form below and I&apos;ll get back to you as soon as possible.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -71,7 +71,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="text-lg font-medium mb-2">Message Sent!</h3>
                 <p className="text-muted-foreground mb-4">
-                  Thank you for reaching out. I'll get back to you soon.
+                  Thank you for reaching out. I&apos;ll get back to you soon.
                 </p>
                 <Button
                   variant="outline"
@@ -153,7 +153,7 @@ export default function ContactPage() {
             <CardHeader>
               <CardTitle>Contact Information</CardTitle>
               <CardDescription>
-                Here's how you can reach me directly.
+                Here&apos;s how you can reach me directly.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">

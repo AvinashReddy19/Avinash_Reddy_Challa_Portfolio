@@ -75,7 +75,7 @@ export default function HomePage() {
       <section className="w-full py-12 md:py-24">
         <div className="container px-4 md:px-6 text-center">
           <h2 className="text-3xl font-bold tracking-tighter mb-4">
-            Let's Build Something Amazing Together
+            Let&apos;s Build Something Amazing Together
           </h2>
           <p className="mx-auto max-w-[700px] text-zinc-500 dark:text-zinc-400 mb-8">
             Interested in working together or want to learn more about my experience?

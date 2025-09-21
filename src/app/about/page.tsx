@@ -91,7 +91,7 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent>
               <p>
-                I am an AI Engineer and Software Developer specializing in creating intelligent, user-friendly applications. My expertise spans voice AI systems, full-stack development, and data integration solutions. I'm passionate about building technology that combines cutting-edge AI capabilities with robust, scalable architecture to solve real-world problems.
+                I am an AI Engineer and Software Developer specializing in creating intelligent, user-friendly applications. My expertise spans voice AI systems, full-stack development, and data integration solutions. I &apos; m passionate about building technology that combines cutting-edge AI capabilities with robust, scalable architecture to solve real-world problems.
               </p>
             </CardContent>
           </Card>
@@ -135,7 +135,7 @@ export default function AboutPage() {
                     </div>
                   </div>
                   <p className="text-sm">
-                    Developed responsive web pages using Shadcn UI components, improving the user interface for cricket fans on the Howzat website during the ICC Men's Cricket World Cup 2023.
+                    Developed responsive web pages using Shadcn UI components, improving the user interface for cricket fans on the Howzat website during the ICC Mens Cricket World Cup 2023.
                   </p>
                 </div>
               </div>

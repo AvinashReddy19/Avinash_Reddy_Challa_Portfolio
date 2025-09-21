@@ -150,7 +150,7 @@ export default function AIAssistantPage() {
         AI Assistant Demo
       </h1>
       <p className="text-muted-foreground max-w-2xl mb-8">
-        Meet AviAssist, an AI-powered assistant built with LangGraph. Ask questions about Avinash's skills, experience, projects, or education.
+        Meet AviAssist, an AI-powered assistant built with LangGraph. Ask questions about Avinash&apos;s skills, experience, projects, or education.
       </p>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -166,7 +166,7 @@ export default function AIAssistantPage() {
               <div>
                 <CardTitle>AviAssist</CardTitle>
                 <CardDescription>
-                  Avinash's portfolio assistant
+                  Avinash&apos;s portfolio assistant
                 </CardDescription>
               </div>
             </div>
@@ -268,10 +268,10 @@ export default function AIAssistantPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <p>
-                AviAssist is powered by LangGraph and Groq's Llama 3 model. This combination provides a fast, responsive AI experience with the advanced multi-agent capabilities of LangGraph.
+                AviAssist is powered by LangGraph and Groq&apos;s Llama 3 model. This combination provides a fast, responsive AI experience with the advanced multi-agent capabilities of LangGraph.
               </p>
               <p>
-                This assistant has been trained on Avinash's resume data and can answer questions about his:
+                This assistant has been trained on Avinash&apos;s resume data and can answer questions about his:
               </p>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Professional experience</li>

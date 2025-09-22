@@ -263,7 +263,7 @@ export default function AboutPage() {
                     My expertise spans voice AI systems, full-stack development, and data integration solutions.
                   </p>
                   <p className="text-lg leading-relaxed mt-4">
-                    I'm passionate about building technology that combines cutting-edge AI capabilities with robust, 
+                    I&apos;m passionate about building technology that combines cutting-edge AI capabilities with robust, 
                     scalable architecture to solve real-world problems. My focus areas include LangChain-based AI agents,
                     multilingual voice systems, and creating seamless data pipelines.
                   </p>

@@ -162,12 +162,12 @@ export default function ContactPage() {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <Badge className="mb-4">Let's Talk</Badge>
+          <Badge className="mb-4">Let&apos;s Talk</Badge>
           <h1 className="text-3xl font-bold tracking-tighter mb-4 md:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
             Get in Touch
           </h1>
           <p className="text-muted-foreground max-w-2xl">
-            Have a question or interested in working together? Feel free to reach out. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+            Have a question or interested in working together? Feel free to reach out. I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
           </p>
         </motion.div>
 
@@ -203,7 +203,7 @@ export default function ContactPage() {
                     </div>
                     <h3 className="text-xl font-medium mb-3">Message Sent!</h3>
                     <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                      Thank you for reaching out. I'll review your message and get back to you as soon as possible.
+                      Thank you for reaching out. I&apos;ll review your message and get back to you as soon as possible.
                     </p>
                     <Button
                       variant="outline"
@@ -420,13 +420,13 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-medium text-foreground mb-1">Are you available for remote work?</h3>
                     <p className="text-sm text-muted-foreground">
-                      Yes, I'm comfortable working remotely and have experience collaborating with distributed teams.
+                      Yes, I&apos;m comfortable working remotely and have experience collaborating with distributed teams.
                     </p>
                   </div>
                   <div>
-                    <h3 className="font-medium text-foreground mb-1">What's your preferred collaboration method?</h3>
+                    <h3 className="font-medium text-foreground mb-1">What&apos;s your preferred collaboration method?</h3>
                     <p className="text-sm text-muted-foreground">
-                      I'm flexible with tools like Slack, Discord, MS Teams, or any platform that works best for your team.
+                      I&apos;m flexible with tools like Slack, Discord, MS Teams, or any platform that works best for your team.
                     </p>
                   </div>
                 </CardContent>

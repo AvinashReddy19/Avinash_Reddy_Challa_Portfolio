@@ -315,7 +315,7 @@ export default function AIAssistantPage() {
         </motion.div>
         
         <p className="text-muted-foreground max-w-2xl mb-8">
-          Meet AviAssist, an AI-powered assistant built with LangGraph and Groq's Llama 3 model. Ask questions about Avinash's skills, experience, projects, or education.
+          Meet AviAssist, an AI-powered assistant built with LangGraph and Groq&apos;s Llama 3 model. Ask questions about Avinash&apos;s skills, experience, projects, or education.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -351,7 +351,7 @@ export default function AIAssistantPage() {
                       </div>
                       <h3 className="text-lg font-bold mb-2">How can I help you?</h3>
                       <p className="text-sm text-muted-foreground mb-4">
-                        Ask me anything about Avinash's skills, experience, projects, or education.
+                        Ask me anything about Avinash&apos;s skills, experience, projects, or education.
                       </p>
                       <div className="text-xs text-muted-foreground">
                         Try one of the example questions to get started

@@ -8,159 +8,74 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Code, Cpu, Database, ExternalLink, Github, MessageCircle, Zap } from "lucide-react";
+import { ArrowRight, Code, Cpu, Database, MessageCircle, Zap } from "lucide-react";
+import ParticleBackground from "@/components/home/ParticleBackground";
 
 // Need to install:
 // npm install framer-motion typewriter-effect
 import Typewriter from 'typewriter-effect';
+
+// Component prop types
+type SkillCardProps = {
+  icon: ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  delay?: number;
+};
+
+type ProjectCardProps = {
+  title: string;
+  description: string;
+  tags: string[];
+  delay?: number;
+};
+
+// Animated glow background component
+function GlowingBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden -z-10">
+      {/* Primary glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-r from-primary/20 to-primary/5 blur-3xl opacity-30" />
+      
+      {/* Secondary glow */}
+      <motion.div 
+        className="absolute -top-20 right-1/4 w-[300px] h-[300px] rounded-full bg-primary/10 blur-3xl opacity-20"
+        animate={{ 
+          y: [0, 20, 0], 
+          opacity: [0.2, 0.3, 0.2] 
+        }}
+        transition={{ 
+          duration: 8, 
+          repeat: Infinity, 
+          ease: "easeInOut" 
+        }}
+      />
+      
+      {/* Third glow */}
+      <motion.div 
+        className="absolute bottom-20 left-1/4 w-[400px] h-[400px] rounded-full bg-primary/15 blur-3xl opacity-20"
+        animate={{ 
+          y: [0, -30, 0], 
+          opacity: [0.2, 0.25, 0.2] 
+        }}
+        transition={{ 
+          duration: 10, 
+          repeat: Infinity, 
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
+    </div>
+  );
+}
 
 export default function HomePage() {
   const { scrollY } = useScroll();
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
   const heroScale = useTransform(scrollY, [0, 300], [1, 0.9]);
   const heroY = useTransform(scrollY, [0, 300], [0, 100]);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   
-  // Particle background effect
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    type Particle = {
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      opacity: number;
-    };
-
-    let animationFrameId: number;
-    let particles: Particle[] = [];
-    const mousePosition = { x: 0, y: 0 };
-    let isMouseMoving = false;
-    let lastMouseMoveTime = Date.now();
-
-    // Set canvas to full width/height
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    // Initialize particles
-    const initParticles = () => {
-      particles = [] as Particle[];
-      const particleCount = Math.floor(window.innerWidth * window.innerHeight / 10000);
-      
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          size: Math.random() * 2 + 0.5,
-          speedX: (Math.random() - 0.5) * 0.5,
-          speedY: (Math.random() - 0.5) * 0.5,
-          opacity: Math.random() * 0.5 + 0.1
-        } as Particle);
-      }
-    };
-
-    // Track mouse movement
-    const handleMouseMove = (e: MouseEvent) => {
-      mousePosition.x = e.clientX;
-      mousePosition.y = e.clientY;
-      isMouseMoving = true;
-      lastMouseMoveTime = Date.now();
-    };
-
-    // Animate particles
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Check if mouse stopped moving
-      if (Date.now() - lastMouseMoveTime > 100) {
-        isMouseMoving = false;
-      }
-      
-      particles.forEach((particle, index) => {
-        // Move particles
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
-        
-        // If mouse is moving, attract particles towards mouse
-        if (isMouseMoving) {
-          const dx = mousePosition.x - particle.x;
-          const dy = mousePosition.y - particle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < 200) {
-            const forceX = dx / distance * 0.5;
-            const forceY = dy / distance * 0.5;
-            particle.speedX += forceX * 0.2;
-            particle.speedY += forceY * 0.2;
-          }
-        }
-        
-        // Apply friction to prevent excessive speed
-        particle.speedX *= 0.98;
-        particle.speedY *= 0.98;
-        
-        // Wrap around canvas edges
-        if (particle.x < 0) particle.x = canvas.width;
-        if (particle.x > canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = canvas.height;
-        if (particle.y > canvas.height) particle.y = 0;
-        
-        // Draw particle
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(170, 170, 190, ${particle.opacity})`;
-        ctx.fill();
-        
-        // Draw connections between nearby particles
-        for (let j = index + 1; j < particles.length; j++) {
-          const particle2 = particles[j];
-          const dx = particle.x - particle2.x;
-          const dy = particle.y - particle2.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < 100) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(170, 170, 190, ${0.1 * (1 - distance / 100)})`;
-            ctx.lineWidth = 0.5;
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(particle2.x, particle2.y);
-            ctx.stroke();
-          }
-        }
-      });
-      
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    resizeCanvas();
-    initParticles();
-    animate();
-    
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
   // Skill card component
-  type SkillCardProps = {
-    icon: ComponentType<{ className?: string }>;
-    title: string;
-    description: string;
-    delay?: number;
-  };
-
   const SkillCard = ({ icon: Icon, title, description, delay = 0 }: SkillCardProps) => {
     return (
       <motion.div
@@ -188,13 +103,6 @@ export default function HomePage() {
   };
 
   // Project card component
-  type ProjectCardProps = {
-    title: string;
-    description: string;
-    tags: string[];
-    delay?: number;
-  };
-
   const ProjectCard = ({ title, description, tags, delay = 0 }: ProjectCardProps) => {
     return (
       <motion.div
@@ -211,7 +119,7 @@ export default function HomePage() {
             <h3 className="text-xl font-bold mb-1 group-hover:text-primary transition-colors">{title}</h3>
             <p className="text-sm text-muted-foreground mb-4">{description.substring(0, 120)}...</p>
             <div className="flex flex-wrap gap-2 mt-auto">
-              {tags.slice(0, 3).map((tag: string, index: number) => (
+              {tags.slice(0, 3).map((tag, index) => (
                 <Badge key={index} variant="secondary">
                   {tag}
                 </Badge>
@@ -254,11 +162,19 @@ export default function HomePage() {
 
   return (
     <div className="relative">
-      {/* Interactive Particle Background */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full pointer-events-none z-0"
+      {/* Enhanced Particle Background */}
+      <ParticleBackground 
+        color="rgba(255, 255, 255, 0.8)" 
+        density={80}
+        speed={0.3}
+        connectionRadius={180}
+        particleSize={1.8}
+        connectionOpacity={0.12}
+        particleOpacity={0.7}
       />
+      
+      {/* Glowing Background Effect */}
+      <GlowingBackground />
       
       {/* Hero Section */}
       <motion.section
@@ -269,8 +185,6 @@ export default function HomePage() {
         }}
         className="relative min-h-[90vh] flex flex-col justify-center items-center"
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-primary/20 to-primary/5 blur-3xl opacity-50 -z-10" />
-        
         <div className="container px-4 md:px-6 text-center z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -490,13 +404,13 @@ export default function HomePage() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <Badge className="mb-6">Let&apos;s Connect</Badge>
+              <Badge className="mb-6">Let's Connect</Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Ready to Build Something Amazing Together?
               </h2>
               <p className="text-muted-foreground mb-8 text-lg">
-                Whether you&apos;re looking for an AI Engineer for your next project or want to discuss innovative ideas,
-                I&apos;d love to hear from you.
+                Whether you're looking for an AI Engineer for your next project or want to discuss innovative ideas,
+                I'd love to hear from you.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild className="w-full sm:w-auto">

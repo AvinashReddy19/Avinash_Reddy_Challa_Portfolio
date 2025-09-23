@@ -24,7 +24,11 @@ export default function RootLayout({
         <Providers>
           <div className="relative min-h-screen flex flex-col">
             <Navbar />
-            <main className="flex-grow">{children}</main>
+            <main className="flex-grow w-full">
+              <div className="mx-auto w-full max-w-screen-2xl px-4 md:px-6 lg:px-8 xl:px-10">
+                {children}
+              </div>
+            </main>
             <Footer />
           </div>
         </Providers>

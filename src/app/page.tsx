@@ -404,13 +404,13 @@ export default function HomePage() {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <Badge className="mb-6">Let's Connect</Badge>
+              <Badge className="mb-6">Let&apos;s Connect</Badge>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Ready to Build Something Amazing Together?
               </h2>
               <p className="text-muted-foreground mb-8 text-lg">
-                Whether you're looking for an AI Engineer for your next project or want to discuss innovative ideas,
-                I'd love to hear from you.
+                Whether you&apos;re looking for an AI Engineer for your next project or want to discuss innovative ideas,
+                I&apos;d love to hear from you.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild className="w-full sm:w-auto">
